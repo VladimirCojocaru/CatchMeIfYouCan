@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Proiect pentru atestat</title>
+        <link href='https://fonts.googleapis.com/css?family=Baloo' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Modak' rel='stylesheet'>
+    </head>
+    <body>
+     <style>* {
+     margin: 0;
+     padding: 0;
+ }
+
+body {
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+.cap {
+    width: 98%;
+    background-color: #3399FF;
+    color: black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 5px solid black;
+    border-radius: 5px;
+}
+.reguli {
+    width: 98%;
+    height: 160%;
+    background-color: #FF9966;
+    color:black;
+    border: 5px solid white;
+    border-radius: 5px;
+    font-size:3.27vw;
+}
+.personaje{
+    height:60px;
+    padding:10px;
+}
+.btn {
+    width: 105px;
+    height: 50px;
+    background-color: gold;
+    font-family: "Times news roman",Georgia,Serif;
+    font-weight: bold;
+    border-radius: 20px;
+    border-color:lightblue;
+    font-size: 17px;
+    outline: none;
+}
+.btnpers{
+    width: 50px;
+    height: 35px;
+    background-color: teal;
+    font-family: "Times news roman",Georgia,Serif;
+    font-weight: bold;
+    border-radius: 20px;
+    border-color:gold;
+    font-size: 10px;
+    color:white;
+    outline: none;
+}
+.btnmod{
+    width: 80px;
+    height: 40px;
+    background-color: #3366FF;
+    font-family: "Times news roman",Georgia,Serif;
+    font-weight: bold;
+    border-radius: 20px;
+    border-color:#FF3333;
+    font-size: 12px;
+    color:white;
+    outline: none;
+}
+.joc {
+    width: 100%;
+    height: 90vh;
+    padding-top:40px;
+    background-color: #66CDAA;
+    display: none;
+}
+.gojoc{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 4;
+    background-color: green;
+    color:black;
+    text-align: center;
+    padding-top: 40%;
+    display: none;
+}
+.fitigata{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 4;
+    background-color: red;
+    color:black;
+    text-align: center;
+    padding-top: 40%;
+    display: none;
+}
+.pelocuri{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 4;
+    background-color: red;
+    color:black;
+    text-align: center;
+    padding-top: 40%;
+    display: none;
+}
+svg{
+  position: relative;
+  left:30%;
+  transition:0.1s ease;
+  z-index:2;
+  display:none;
+}
+svg1{
+  position: relative;
+  left:30%;
+  transition:0.1s ease;
+  z-index:2;
+  display:none;
+}
+svg2{
+  position: relative;
+  left:30%;
+  transition:0.1s ease;
+  z-index:2;
+  display:block;
+}
+svg4{
+  position: relative;
+  left:30%;
+  transition:0.1s ease;
+  z-index:2;
+  display:none;
+}
+.scor{
+    position:absolute;
+    font-weight: bold;
+    color:black;
+    left:5px;
+    top:2px;
+    z-index:3;
+}
+.ratari{
+    position:absolute;
+    font-weight: bold;
+    color:black;
+    left:5px;
+    top:16px;
+    z-index:3;
+}
+.inapoi{
+    position:absolute;
+    right:5px;
+    top:5px;
+    width: 50px;
+    height: 30px;
+    z-index:3;
+    background-color: black;
+    font-family: "Times news roman",Georgia,Serif;
+    font-weight: bold;
+    border-radius: 20px;
+    border-color:white;
+    font-size: 10px;
+    color:white;
+    outline: none;
+}
+.title {
+    font-family: "Baloo";
+    font-size: 8vw;
+    display: inline-block;
+}
+#t1 {
+    color: red;
+}
+#t2 {
+    color: orange;
+}
+#t3 {
+    color: yellow;
+}
+#t4 {
+    color: green;
+}
+#t5 {
+    color: blue;
+}
+#t6 {
+    color: #FF3366;
+}
+#t7 {
+    color: purple;
+}
+
+#t8 {
+    color: #CC99FF;
+}
+.title2 {
+    font-family: "Modak";
+    font-size: 9vw;
+    display: inline-block;
+}
+#t1 {
+    color: red;
+}
+#t2 {
+    color: orange;
+}
+#t3 {
+    color: yellow;
+}
+#t4 {
+    color: green;
+}
+#t5 {
+    color: blue;
+}
+#t6 {
+    color: #FF3366;
+}
+#t7 {
+    color: purple;
+}
+#t8 {
+    color: #CC99FF;
+}
+</style>
+     <script>var scr=0;
+var timp=800;
+var ints=0;
+var dead=0;
+var mouse=0;
+var MsauE=0;
+var gmv=0;
+var bomba=0.1;
+var mod=0;
+var rat=0;
+var startmiscare=0;
+var lovit=0;
+function modbomba()
+{ mod=1;
+var ratari=document.getElementById("ratari");
+ratari.style.display = "none";
+/*svg=document.getElementById("svg");
+  svg.style.display="none";
+svg1=document.getElementById("svg1");
+  svg1.style.display="none";*/
+  btnmodbomba=document.getElementById("btnmod2");
+  btnmodinfinit=document.getElementById("btnmod1");
+  btnmodratari=document.getElementById("btnmod3");
+  btnmodbomba.style.background="#993399";
+  btnmodbomba.style.borderColor="teal";
+  btnmodinfinit.style.background="#3366FF";
+  btnmodinfinit.style.borderColor="#FF3333";
+  btnmodratari.style.background="#3366FF";
+  btnmodratari.style.borderColor="#FF3333";
+  }
+function modinfinit()
+{ mod=0;
+var ratari=document.getElementById("ratari");
+ratari.style.display = "none";
+  var svg4=document.getElementById("svg4");
+  svg4.style.display="none";
+  btnmodinfinit=document.getElementById("btnmod1");
+  btnmodbomba=document.getElementById("btnmod2");
+  btnmodratari=document.getElementById("btnmod3");
+  btnmodbomba.style.background="#3366FF";
+  btnmodbomba.style.borderColor="#FF3333";
+  btnmodratari.style.background="#3366FF";
+  btnmodratari.style.borderColor="#FF3333";
+  btnmodinfinit.style.background="#993399";
+  btnmodinfinit.style.borderColor="teal";
+}
+function modratari()
+{ mod=2;
+var ratari=document.getElementById("ratari");
+ratari.style.display = "block";
+  var svg4=document.getElementById("svg4");
+  svg4.style.display="none";
+  btnmodinfinit=document.getElementById("btnmod1");
+  btnmodbomba=document.getElementById("btnmod2");
+  btnmodratari=document.getElementById("btnmod3");
+  btnmodbomba.style.background="#3366FF";
+  btnmodbomba.style.borderColor="#FF3333";
+  btnmodinfinit.style.background="#3366FF";
+  btnmodinfinit.style.borderColor="#FF3333";
+  btnmodratari.style.background="#993399";
+  btnmodratari.style.borderColor="teal";
+}
+function start()
+{
+    if(mod===0)
+{
+scr=0;
+{var s=document.getElementById("scor");
+  s.innerHTML=("Scor: " + scr);
+    var cap = document.getElementById("cap");
+    var reguli = document.getElementById("reguli");
+    var joc = document.getElementById("joc");
+    var gojoc=document.getElementById("gojoc");
+    var fitigata=document.getElementById("fitigata");
+    var start=document.getElementById("pelocuri");
+    if(MsauE==0)
+    {
+        var svg2=document.getElementById("svg2");
+        svg2.style.display="block";
+    }
+    cap.style.display = "none";
+    reguli.style.display = "none";
+    joc.style.display = "block";
+    gojoc.style.display = "block";
+    fitigata.style.display = "block";
+    start.style.display = "block";
+    setTimeout(function() {
+        start.style.display = "none";
+    }, 500);
+            setTimeout(function() {
+        fitigata.style.display = "none";
+    }, 1000);
+     setTimeout(function() {
+        gojoc.style.display = "none";
+    }, 1500);}
+}
+  
+  if(mod==1 || mod==2)
+  {rat=-2;
+   scr=0;
+    var s=document.getElementById("scor");
+    s.innerHTML=("Scor: " + scr);
+    var svg4=document.getElementById("svg4");
+    var cap = document.getElementById("cap");
+    var reguli = document.getElementById("reguli");
+    var joc = document.getElementById("joc");
+    var gojoc=document.getElementById("gojoc");
+    var fitigata=document.getElementById("fitigata");
+    var start=document.getElementById("pelocuri");
+    if(MsauE==0)
+    {
+        var svg2=document.getElementById("svg2");
+        svg2.style.display="block";
+    }
+    svg4.style.display="none";
+    cap.style.display = "none";
+    reguli.style.display = "none";
+    joc.style.display = "block";
+    gojoc.style.display = "block";
+    fitigata.style.display = "block";
+    start.style.display = "block";
+    setTimeout(function() {
+        start.style.display = "none";
+    }, 500);
+            setTimeout(function() {
+        fitigata.style.display = "none";
+    }, 1000);
+     setTimeout(function() {
+        gojoc.style.display = "none";
+    }, 1500);
+  startmiscare=1;
+  }
+}
+function scor()
+{  if(!lovit)
+    {scr=scr+1;
+    lovit=1;
+  var s=document.getElementById("scor");
+  s.innerHTML=("Scor: " + scr);
+  var j=document.getElementById("joc");
+  if(scr==50)
+      {alert("Gata,momentan nu se mai schimba nimic,a?teapta ?i tu un UPDATE!!")}
+   if(scr==60){
+   alert("Vad ca totu?i î?i cam place...dar serios,nu mai apare nimic...")}
+   if(scr==100){
+       alert("Te-ai jucat un pic prea mult,nu crezi?")}
+   if(scr==200){
+       alert("Deja ai o problema...lasa jocul, telefonul, ?i hai sa înva?am pentru Bac,ce zici?")}
+   if(scr==10)
+   j.style.background="purple";
+   if(scr==20)
+   j.style.background="orange";
+   if(scr==30)
+   j.style.background="#FF0066";
+   if(scr==40)
+   j.style.background="linear-gradient(violet, blue, #0088FF,green, yellow, orange, red)";
+   if(scr==50)
+   j.style.background="radial-gradient(pink, violet, blue, #0088FF,green, yellow, orange, orange, red, red)";}
+}
+function miscare()
+{
+    if(mod===0)
+    {if(MsauE==1)
+ {var svg=document.getElementById("svg")
+ var t=Math.floor(Math.random()*90);
+ var r=Math.floor(Math.random()*90);
+ svg.style.top=(t  + "%");
+ svg.style.left=(r  + "%");}
+    if(MsauE==2)
+ {var svg1=document.getElementById("svg1")
+ var t=Math.floor(Math.random()*90);
+ var r=Math.floor(Math.random()*90);
+ svg1.style.top=(t + "%");
+ svg1.style.left=(r  + "%");}
+    if(MsauE===0)
+ {var svg2=document.getElementById("svg2")
+ var t=Math.floor(Math.random()*90);
+ var r=Math.floor(Math.random()*90);
+ svg2.style.top=(t  + "%");
+ svg2.style.left=(r  + "%");}
+ lovit=0;
+}
+     if(mod==1)
+     {
+         var bomba=Math.random();
+ if(bomba>0.6)
+{var svg4=document.getElementById("svg4");
+ setTimeout(function() {svg4.style.display = "block";},100)
+ }
+ if(bomba<=0.6)
+ {var svg4=document.getElementById("svg4");
+ setTimeout(function() {svg4.style.display = "none";},100)
+ }
+ var svg=document.getElementById("svg");
+ var svg1=document.getElementById("svg1");
+ var svg4=document.getElementById("svg4");
+ var svg2=document.getElementById("svg2");
+ var t=Math.floor(Math.random()*90);
+ var r=Math.floor(Math.random()*90);
+        
+        svg.style.top=(t  + "%");
+        svg.style.left=(r  + "%");
+        svg1.style.top=(t + "%");
+        svg1.style.left=(r  + "%");
+        svg2.style.top=(t  + "%");
+        svg2.style.left=(r  + "%");
+        svg4.style.top=(t  + "%");
+        svg4.style.left=(r  + "%");
+        lovit=0;
+     }
+     if(mod==2)
+     {
+      if(startmiscare==1)
+{var svg2=document.getElementById("svg2");
+ var svg=document.getElementById("svg");
+ var svg1=document.getElementById("svg1");
+ var t=Math.floor(Math.random()*90);
+ var r=Math.floor(Math.random()*90);
+        svg.style.top=(t  + "%");
+        svg.style.left=(r  + "%");
+        svg1.style.top=(t + "%");
+        svg1.style.left=(r  + "%");
+        svg2.style.top=(t  + "%");
+        svg2.style.left=(r  + "%");
+    rat = (lovit ? rat: ++rat);
+        lovit =0;
+    var ratari=document.getElementById("ratari");
+    ratari.innerHTML=("Ratari: " + rat);    
+}
+lovit=0;
+if(rat==10)
+    {alert("AI PIERDUT!!!");
+    var cap = document.getElementById("cap");
+    var reguli = document.getElementById("reguli");
+    var joc = document.getElementById("joc");
+    cap.style.display = "block";
+    reguli.style.display = "block";
+    joc.style.display = "none";
+    var svg2=document.getElementById("svg2");
+    svg2.style.display = "none";}
+    }
+}
+function emoji()
+{ 
+    if(scr<10 && dead===0)
+{
+   alert("Nici Emoji nu vrea sa fie fugarit de oricine!\nTrebuie sa faci scor 10 ca sa po?i juca cu el!")
+   }
+  if(scr>9 || dead==1 )
+{navigator.vibrate(100);
+var persint=document.getElementById("svg2")
+     persint.style.display="none";
+    var mickey=document.getElementById("svg1")
+  mickey.style.display = "none";
+var emoji=document.getElementById("svg");
+  emoji.style.display = "block";
+  MsauE=1;
+  dead=1;
+  var btnemoji=document.getElementById("btnpers2")
+  var btnmickey=document.getElementById("btnpers1")
+  btnmickey.style.background="teal";
+  btnmickey.style.borderColor="gold";
+  btnemoji.style.background="#990000";
+  btnemoji.style.borderColor="black";
+  }
+}
+function mickey()
+{ if(scr<30 && mouse===0)
+{
+   alert("Chiar crezi ca îl po?i prinde pe Mickey fara pu?ina experien?a?\nTrebuie sa faci scor 30 ca sa po?i juca cu el!")
+   }
+  if(scr>29 || mouse==1)
+     {
+     navigator.vibrate(100);
+     var persint=document.getElementById("svg2")
+     persint.style.display="none";
+         var mickey=document.getElementById("svg1")
+        mickey.style.display = "block";
+      var emoji=document.getElementById("svg");
+        emoji.style.display = "none";
+         MsauE=2;
+         mouse=1;
+  var btnemoji=document.getElementById("btnpers2")
+  var btnmickey=document.getElementById("btnpers1")
+  btnmickey.style.background="#e60000";
+  btnmickey.style.borderColor="black";
+  btnemoji.style.background="teal";
+  btnemoji.style.borderColor="gold";
+     }
+}
+function gameover()
+{ gmv=1;
+if(gmv=1)
+{alert("AI PIERDUT!!!");
+ var cap = document.getElementById("cap");
+    var reguli = document.getElementById("reguli");
+    var joc = document.getElementById("joc");
+    cap.style.display = "block";
+    reguli.style.display = "block";
+    joc.style.display = "none";
+    var svg4=document.getElementById("svg4")
+    svg4.style.display = "none";
+    var svg2=document.getElementById("svg2")
+    svg2.style.display = "none";
+}
+scr=scr-1;
+}
+function inapoi()
+{
+    var cap = document.getElementById("cap");
+    var reguli = document.getElementById("reguli");
+    var joc = document.getElementById("joc");
+    var pers=document.getElementById("pers");
+    cap.style.display = "block";
+    reguli.style.display = "block";
+    joc.style.display = "none";
+    var mickey=document.getElementById("svg1")
+    mickey.style.display = "none";
+    var emoji=document.getElementById("svg")
+    emoji.style.display = "none";
+    var persint=document.getElementById("svg2")
+     persint.style.display="block";
+    MsauE=0;
+    rat=-1000000;
+}
+window.onload=function(){
+window.ints=setInterval (miscare,timp);
+}
+</script>
+        <div class="cap" id="cap">
+                <div class="title2" id="t1">J</div>
+                <div class="title2" id="t2">o</div>
+                <div class="title2" id="t3">c</div>
+                <div class="title2" id="t4">u</div>
+                <div class="title2" id="t5">l</div>
+                <div class="title2">&nbsp;</div>
+                <div class="title2" id="t6">l</div>
+                <div class="title2" id="t7">u</div>
+                <div class="title2" id="t8">i</div>
+                <div class="title2">&nbsp;</div>
+                <div class="title2" id="t2">V</div>
+                <div class="title2" id="t4">l</div>
+                <div class="title2" id="t6">a</div>
+                <div class="title2" id="t1">d</div>
+                <div class="title2" id="t3">i</div>
+                <div class="title2" id="t5">m</div>
+                <div class="title2" id="t7">i</div>
+                <div class="title2" id="t4">r</div>
+                <div class="title2" id="t8">!</div>
+            <h1>Aka</h1>
+            <div class="title" id="t1">P</div>
+                <div class="title" id="t2">r</div>
+                <div class="title" id="t3">i</div>
+                <div class="title" id="t4">n</div>
+                <div class="title" id="t5">d</div>
+                <div class="title" id="t6">e</div>
+                <div class="title" id="t7">-</div>
+                <div class="title" id="t8">m</div>
+                <div class="title" id="t3">a</div>
+                <div class="title">&nbsp;</div>
+                <div class="title" id="t4">d</div>
+                <div class="title" id="t7">a</div>
+                <div class="title" id="t6">c</div>
+                <div class="title" id="t8">a</div>
+                <div class="title">&nbsp;</div>
+                <div class="title" id="t1">p</div>
+                <div class="title" id="t5">o</div>
+                <div class="title" id="t2">?</div>
+                <div class="title" id="t4">i</div>
+                <div class="title" id="t6">!</div>
+        </div>
+         <div class="reguli" id="reguli">
+             <h1>Cum se joaca?</h1>
+             <!--<embed name="PinkPanther" src="https://www.youtube.com/watch?v=o67bgKNrQGw" loop="true" hidden="true" autostart="true">-->
+             <br>
+             <h3>Modul infinit!</h3>
+             <p>La acest mod trebuie sa dai click pe emoji de cât mai multe ori!</p>
+             <p>La un anumit scor o sa apara sau o sa se schimbe câte ceva!</p>
+             <br>
+             <h3>Modul cu bomba!</h3>
+             <p>La acest mod trebuie sa nu ape?i când apare bomba ca altfel pierzi!</p>
+     <p>?i aici se schimba câte ceva la un anumit scor!</p>
+             <br>
+             <h3>Modul fara ratari!</h3>
+             <p>La acest mod trebuie sa nu ratezi nicio apari?ie a personajului!</p><p>La 10 ratari pierzi!</p>
+     <p>Bineîn?eles ca ?i aici se schimba câte ceva la un anumit scor!</p>
+             <br><br>
+               <div class="personaje" id="personaje">
+                   <h3><u>Hai sa î?i alegi ?i personajul pe care sa-l prinzi!</u></h3><h3>(doar pentru modurile infinit ?i fara ratari)</h3>
+                   <br>
+                   <button class="btnpers" id="btnpers1" onclick="mickey()">Mickey Mouse</button>    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   <button class="btnpers" id="btnpers2" onclick="emoji()">Dead Emoji</button>
+                </div>
+            <br><br><br>
+            <h3><u>Alege ?i un mod de joc!</u></h3><h3>(daca nu ape?i pe niciunul intri direct în modul infinit)</h3> <br>
+            <button class="btnmod" id="btnmod1" onclick="modinfinit()">Mers spre infinit!</button>         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btnmod" id="btnmod2" onclick="modbomba()">Ai grija la bomba!</button>    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btnmod" id="btnmod3" onclick="modratari()">Nu rata ca pierzi!</button>
+<br><br><br>
+             <button class="btn" id="btn" onclick="start()">Sa trecem la treaba</button>
+    </div>
+    <div class="gojoc" id="gojoc">
+        <div class="title" >S</div>
+        <div class="title" >t</div>
+        <div class="title" >a</div>
+        <div class="title" >r</div>
+        <div class="title" >t</div>
+        <div class="title" >!</div>
+    </div>
+     <div class="fitigata" id="fitigata">
+        <div class="title" >F</div>
+        <div class="title" >i</div>
+        <div class="title" >?</div>
+        <div class="title" >i</div>
+        <div class="title">&nbsp;</div>
+        <div class="title" >g</div>
+        <div class="title">a</div>
+        <div class="title">t</div>
+         <div class="title">a</div>
+        <div class="title" >!</div>
+    </div>
+     <div class="pelocuri" id="pelocuri">
+        <div class="title" >P</div>
+        <div class="title" >e</div>
+        <div class="title">&nbsp;</div>
+        <div class="title" >l</div>
+        <div class="title">o</div>
+        <div class="title">c</div>
+         <div class="title">u</div>
+         <div class="title">r</div>
+         <div class="title">i</div>
+        <div class="title" >!</div>
+    </div>
+    <div class="joc" id="joc">
+        <svg width="33" height="30" id="svg" onclick="scor()">
+        <circle cx=17.5 cy=15 r=14 stroke-width="2" stroke="black" fill="gold"/>
+        <line x1=8 y1=10 x2=16 y2=15 style="stroke:#000000; stroke-linecap:round;" stroke-width="2"/>
+        <line x1=8 y1=15 x2=16 y2=10 style="stroke:#000000; stroke-linecap:round;" stroke-width="2"/>
+        <line x1=20 y1=10 x2=28 y2=15 style="stroke:#000000; stroke-linecap:round;" stroke-width="2"/>
+        <line x1=20 y1=15 x2=28 y2=10 style="stroke:#000000; stroke-linecap:round;" stroke-width="2"/>
+        <line x1=10 y1=21 x2=25 y2=21 style="stroke:#000000; stroke-linecap: round;" stroke-width="2"/>
+        </svg>
+    <svg width="40" height="41" id="svg1" onclick="scor()">
+<circle cx=19.5 cy=20 r=12 fill="black"/>
+<circle cx=7 cy=8 r=7 fill="black"/>
+<circle cx=33 cy=8 r=7 fill="black"/>
+<line x1=8.7 y1=22 x2=30 y2=22 style="stroke:#FF0000; stroke-linecap: round;" stroke-width="4"/>
+<line x1=10 y1=24 x2=28.5 y2=24 style="stroke:#FF0000; stroke-linecap: round;" stroke-width="4"/>
+<line x1=12 y1=26 x2=27 y2=26 style="stroke:#FF0000; stroke-linecap: round;" stroke-width="4"/>
+<line x1=14 y1=28 x2=25.5 y2=28 style="stroke:#FF0000; stroke-linecap: round;" stroke-width="4"/>
+<line x1=16 y1=30 x2=22.9 y2=30 style="stroke:#FF0000; stroke-linecap: round;" stroke-width="4"/>
+<ellipse cx="16" cy="25" rx="2.5" ry="4" style="fill:yellow;stroke:black;stroke-width:1" />
+<ellipse cx="23" cy="25" rx="2.5" ry="4" style="fill:yellow;stroke:black;stroke-width:1" />
+      </svg>
+       <svg width="35" height="35" id="svg2" onclick="scor()">
+        <circle cx=17.5 cy=19 r=15 stroke-width="2" stroke="black" fill="#9999FF"/>
+        <!--Fara inchidere de </svg> pt. ca altfel nu putem suprapune cele doua corpuri!! -->
+       <svg width="35" height="35" id="svg4" onclick="gameover()">
+        <circle cx=17.5 cy=19 r=15 fill="black"/>
+<line x1=25 y1=10 x2=28 y2=6   style="stroke:black; stroke-linecap:square;" stroke-width="9"/>
+ <text x=2 y=24 fill="red">Pow</text>
+        </svg>
+        </svg>
+        <div class="ratari" id="ratari">
+        </div>
+        <div class="scor" id="scor">
+           <p>Scor: 0</p>
+        </div>
+   <div> 
+<button class="inapoi" id="inapoi" onclick="inapoi()">Înapoi</button></div>         
+  </div>
+ </body>
+</html>
